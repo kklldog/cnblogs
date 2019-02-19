@@ -28,6 +28,7 @@ Docker可以说是现在微服务，DevOps的基础，咱们.Net Core自然也�
             .UseStartup<Startup>();
 ```
 *修改Program下的CreateWebHostBuilder方法，让Kestrel监听5000端口*
+   
 ![](http://images.cnblogs.com/cnblogs_com/kklldog/1401672/o_201902192.jpg)   
 *本地运行一下试试*   
 ### 推送源码到代码仓库   
@@ -67,6 +68,7 @@ ENTRYPOINT ["dotnet", "/out/CoreForDocker.dll"]
 **RUN dotnet publish -o /out -c Release**：*编译并发布程序集到容器的out目录*   
 **EXPOSE 5000**:*暴露5000端口*   
 **ENTRYPOINT ["dotnet", "/out/CoreForDocker.dll"]**:*容器启动的时候执行dotnet命令，参数为/out/CoreForDocker.dll*   
+   
 ![](http://images.cnblogs.com/cnblogs_com/kklldog/1401672/o_201902196.jpg)
 *Dockerfile的文件属性设置为始终复制*   
 新建好Dockerfile后git push到代码仓库。   
@@ -88,7 +90,8 @@ docker build -t image_code4docker .
 ```
 docker run -d --name code4docker -p 5000:5000 -v /ect/localtime:/ect/localtime image_core4docker
 ```
-*使用image_core4docker镜像运行一个名为core4docker的容器，绑定宿主机的5000到容器的5000口。其中需要注意的是-v参数映射宿主机的/ect/localtime文件夹到容器的/ect/localtime文件夹，因为经过实践发现容器中的时区有可能跟宿主机不一致，需要映射宿主机的/ect/localtime让容器的时区跟宿主机保持一致。*  
+*使用image_core4docker镜像运行一个名为core4docker的容器，绑定宿主机的5000到容器的5000口。其中需要注意的是-v参数映射宿主机的/ect/localtime文件夹到容器的/ect/localtime文件夹，因为经过实践发现容器中的时区有可能跟宿主机不一致，需要映射宿主机的/ect/localtime让容器的时区跟宿主机保持一致。*
+     
 ![](http://images.cnblogs.com/cnblogs_com/kklldog/1401672/o_20190219160556.png)   
 *访问一下服务器的5000端口，发现能够正确返回数据表示我们的Asp.net Core程序在容器中运行成功了*  
    
