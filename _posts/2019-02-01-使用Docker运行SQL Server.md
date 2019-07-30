@@ -1,3 +1,7 @@
+---
+layout: post
+title:  "sql server in docker"
+---
 现在.net core已经跨平台了，大家也都用上了linux用上了docker。跟.net经常配套使用的SQL SERVER以前一直是windows only，但是从SQL Server 2017开始已经支持运行在docker上，也就说现在SQL Serer已经可以运行在linux下了。   
 下面在Ubuntu 16.4上演示安装并使用SQL Server 2019-CTP3.2
 ## SQL Server in Docker
