@@ -47,3 +47,7 @@ Insert Into Table1 Values (0, 'agile')
 *使用服务器ip加端口连接成功后，可以看到刚才新建的数据库TEST_DB跟表TABLE1还有里面的数据都在。能使用SSMS管理后就简单多了跟使用SQL Server其他版本没啥区别。*   
 ![](http://images.cnblogs.com/cnblogs_com/kklldog/1401672/o_QQ%E6%88%AA%E5%9B%BE20190726004109.png) 
 至此SQL Server in Docker的基本操作演示的差不多了，还有更多的高级功能比如配置故障转移集群，复制订阅，Always On等功能跟windows环境配置还有点区别大家可以自己尝试一下。
+
+    
+关注我的公众号一起玩转技术   
+![](https://s1.ax1x.com/2020/06/29/NfQjds.jpg)

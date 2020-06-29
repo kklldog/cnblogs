@@ -104,3 +104,7 @@ dotnet add HiGithubPackageTest package HiGithubPackage --version 1.0.0
 通过以上一些了操作我们演示了如果上传一个包到Github Packages服务。演示了如果下载一个包到项目并使用它。总体体验其实一般般，但是个人觉得有几个小问题：   
 1. 上传的包并不会出现在nuget.org官方源里面。不出现在官方源里面的话其他项目要使用这个包就会相当麻烦。毕竟大家都喜欢使用nuget管理程序来安装包，使用cli的话会比较麻烦。
 2. 不知道是不是墙的问题，上传包跟安装包都碰到了比较严重的网络问题，如果没有FQ工具的话会很麻烦，当然这不是Github的锅。
+
+    
+关注我的公众号一起玩转技术   
+![](https://s1.ax1x.com/2020/06/29/NfQjds.jpg)

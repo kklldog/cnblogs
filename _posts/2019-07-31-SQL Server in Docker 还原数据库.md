@@ -26,3 +26,7 @@ sudo docker exec -it sqlserver2019 /bin/bash
 看到RESTORE DATABASE successfully的时候表示数据库还原成功了。让我们使用SSMS看看数据库是否真的还原成功了。
 ![](https://www.cnblogs.com/images/cnblogs_com/kklldog/1401672/o_TIM%e6%88%aa%e5%9b%be20190731154250.jpg)   
 可以看到数据库已经还原上去，里面的表，数据都可以正常操作。至此，数据库文件还原成功。
+
+    
+关注我的公众号一起玩转技术   
+![](https://s1.ax1x.com/2020/06/29/NfQjds.jpg)
