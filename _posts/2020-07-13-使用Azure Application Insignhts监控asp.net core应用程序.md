@@ -88,4 +88,7 @@ Application Insights 是 Azure Monitor 的一项功能，是面向开发人员�
 实时指标是个很酷炫的功能，可以在一个界面动态实时显示N个指标。   
 ![UY0iY6.gif](https://s1.ax1x.com/2020/07/13/UY0iY6.gif)
 ## 总结
-asp.net core程序使用Application Insignhts非常简单，通过简单的几行代码就集成完成，并且对业务代码零侵入。Application Insignhts的监控功能非常强大，可以对应用程序、服务器各种指标进行监控。特别是性能指标的请求，对我们进行线上程序的排错，调优具有非常强大指导意义。
+asp.net core程序使用Application Insignhts非常简单，通过简单的几行代码就集成完成，并且对业务代码零侵入。Application Insignhts的监控功能非常强大，可以对应用程序、服务器各种指标进行监控。特别是性能指标的请求，对我们进行线上程序的排错，调优具有非常强大指导意义。   
+    
+关注我的公众号一起玩转技术   
+![](https://s1.ax1x.com/2020/06/29/NfQjds.jpg)
