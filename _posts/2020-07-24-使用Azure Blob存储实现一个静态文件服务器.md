@@ -38,7 +38,46 @@ static代表容器
 ![UvKWbq.png](https://s1.ax1x.com/2020/07/24/UvKWbq.png)
 选择左边菜单“自定义域”。界面上提示有两种方式可以设置自定义域名，我们使用CNAME来实现以下。
 ![UvKRrn.png](https://s1.ax1x.com/2020/07/24/UvKRrn.png)
-     15
+这里使用dnspod来管理域名。
+添加一条记录：    
+主机记录：files   
+记录类型：cname   
+记录值：azblob123.blob.core.windows.net   
+这有配置之后，访问我自己的域名files.xbaby.xyz其实指向的是azblob123.blob.core.windows.net    
 ![UvMUWF.png](https://s1.ax1x.com/2020/07/24/UvMUWF.png)
-    7
+我们使用新域名访问下 http://files.xbaby.xyz/static/1.jpg 浏览器里出现了对应的图片，表示我们的自定义域名起作用了。
+## 使用SDK上传文件
+显然每次上传文件都要登录到Azure的管理平台太麻烦了，我们可以使用Azure Blob提供的.net sdk来制作一个小工具来方便上传文件。
+### 新建一个winform项目
+新建一个winform项目，一个框放一个按钮用来选择文件，选择后进行上传。   
+![aScEOe.png](https://s1.ax1x.com/2020/07/25/aScEOe.png)
+    
+从nuget上安装AzureBlobStorage的sdk
+```
+Install-Package Azure.Storage.Blobs -Version 12.4.4
+```
+使用sdk上传文件需要一个连接串   
 ![UvKhV0.png](https://s1.ax1x.com/2020/07/24/UvKhV0.png)
+实现上传代码：
+```
+        private void btnSelectfiles_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                var path = openFileDialog1.FileName;
+                var fileName = path.Split("\\").Last();
+                string connectionString = "DefaultEndpointsProtocol=https;AccountName=azblob123;AccountKey=GLtYbcXjy+KCOLUgIbdRoEPeWA+esNF/DWDNR7jABJuJrh46SuXfc7EOVS8yJXGXpZej3h/QFR9zzFrIAtuqrw==;EndpointSuffix=core.windows.net";
+                var container = new BlobContainerClient(connectionString, "static");
+                using (var file = File.OpenRead(path))
+                {
+                    container.UploadBlob(fileName, file);
+
+                    MessageBox.Show($"{fileName}上传成功！");
+                }
+            }
+        }
+```
+使用工具选择一张图片稍等一会图片就会上传上去拉。    
+![aSRlSx.png](https://s1.ax1x.com/2020/07/25/aSRlSx.png)
+## 总结
+使用Azure Blob Storage可以方便的上传跟管理各种图片、文本、音视频等文件。上传的每个文件都有一个唯一的url对应，可以方便的通过http在全球访问内进行访问。使用这些特性我们可以轻松的把它当做静态文件服务器来用。我们还可以通过定义域名跟自己的域名结合起来使用，获得更加友好的使用体验。Azure Blob Storage还提供了各种语言的sdk方便使用代码来管理数据。
