@@ -14,7 +14,7 @@
 ![w8IEOP.png](https://s1.ax1x.com/2020/09/10/w8IEOP.png)    
 创建一个仓库名叫：az_devop_test。
 ## 创建Dockerfile
-我们的代码创建为镜像需要一个Dockerfile来描述如果构建这个镜像。在项目根目录下新建一个文件命名为Dockerfile注意不带任何后缀名。以下为Dockerfile的内容：
+我们的代码创建为镜像需要一个Dockerfile来描述如何构建这个镜像。在项目根目录下新建一个文件命名为Dockerfile注意不带任何后缀名。以下为Dockerfile的内容：
 ```
   FROM mcr.microsoft.com/dotnet/core/sdk:3.1-bionic AS build
 WORKDIR /app
@@ -26,15 +26,15 @@ EXPOSE 5000
 ENTRYPOINT ["dotnet", "out/devops_test.dll"]
 ```
 ## 配置Servic Connections
-选择ProjectSetting菜单，选择Service connections。Service connections用来存储跟外部服务的账号密码等信息，这里我们需要配置2个service。    
+选择ProjectSetting菜单，选择Service connections。Service connections用来存储跟外部服务相关的账号密码等信息，这里我们需要配置2个service。    
 1. Docker Hub的信息
 2. 主机SSH的信息
 
 ![w8E7a8.png](https://s1.ax1x.com/2020/09/09/w8E7a8.png)    
 ### 配置Docker Registry service
-我们的pipeline需要给Docker hub推送镜像，所以需要一些必要的信息，比如账号密码动能信息。
+我们的pipeline需要给Docker hub推送镜像，所以需要一些必要的信息，比如账号密码等信息。
 ![wG8uE4.png](https://s1.ax1x.com/2020/09/10/wG8uE4.png)   
-点击"New Service"找到Docker Register项目下一步    
+点击"New Service"找到Docker Register项目点击下一步    
     
 ![w8E5rt.png](https://s1.ax1x.com/2020/09/09/w8E5rt.png)    
 选择DockerHub，填写对应的账号密码   
@@ -43,7 +43,7 @@ ENTRYPOINT ["dotnet", "out/devops_test.dll"]
 ![w85NRA.png](https://s1.ax1x.com/2020/09/10/w85NRA.png)    
 填写主机IP端口等信息。
 ## 修改pipeline
-上次我们的pipeline已经几个步骤，这次需要在上次的基础上继续完善它。
+上次我们的pipeline已经定义好了CI的步骤，这次需要在上次的基础上继续完善CD的功能。
 ### BuildAndPush Task
 找到上次的pipeline选择编辑功能，在右边的Task列表里找到DockerTask，点击出现配置界面    
 ![wGJsHS.png](https://s1.ax1x.com/2020/09/10/wGJsHS.png)    
@@ -57,7 +57,7 @@ command：选择buildAndPush 。build跟push本是两步操作，这里直接合
 
 ![w85tGd.png](https://s1.ax1x.com/2020/09/10/w85tGd.png)    
 ### SSH Task
-添加完BuildAndPush Task后同样的方法在添加SSH Task。    
+添加完BuildAndPush Task后同样的方法再次添加SSH Task。    
 ![w85YPH.png](https://s1.ax1x.com/2020/09/10/w85YPH.png)    
 SSH service connection里选择前面我们配置好的ssh service。    
 Run 这里选择Commands。   
@@ -129,4 +129,4 @@ steps:
 访问一下容器对应的端口，我们的网站已经可以访问了。修改一下代码，然后提交，每次都会自动部署最新的代码到主机。   
 ![wGUSbV.png](https://s1.ax1x.com/2020/09/10/wGUSbV.png)
 ## 总结
-通过2篇文章简单的介绍了Azure DevOps Pipeline如何实现CICD功能。Azure DevOps Pipeline给我的感觉是比较易用的，配置yml其实都是图形化的上手难度会比较小。另外它跟Github有深入的集成，可以使用Github的账号直接登录。况且它还是个免费服务，大家可以试试。
+以上通过2篇文章简单的介绍了Azure DevOps Pipeline如何实现CICD功能。Azure DevOps Pipeline给我的感觉是比较易用的，配置yml其实都是图形化的上手难度会比较小。另外它跟Github有深入的集成，可以使用Github的账号直接登录。况且它还是个免费服务，大家可以试试。
