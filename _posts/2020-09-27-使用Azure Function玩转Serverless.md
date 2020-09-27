@@ -17,7 +17,7 @@ Azure Function是个免费服务，在免费服务列表里找到它并点击创
 > Azure 函数提供1000000请求/月的免费额度
 
 ## 使用VSCode进行本地开发
-在函数列表界面点击“本地开发”。会弹出本地开发指导。选择VSCode环境会出现VSCode的开发环境配置说明。
+在函数列表界面点击“本地开发”。会弹出本地开发指导。选择VSCode环境会出现VSCode的开发环境配置说明。    
 ![0kfec4.png](https://s1.ax1x.com/2020/09/27/0kfec4.png)   
 首先本地需要安装node跟npm。使用下面的命令自动安装Core Tools包：
 ```
@@ -31,7 +31,7 @@ npm install -g azure-functions-core-tools@3 --unsafe-perm true
 ## 新建Function
 我们按照完VSCode的插件后，切换到Azure Function菜单。   
 ![0kfsC8.png](https://s1.ax1x.com/2020/09/27/0kfsC8.png)   
-点击新建按钮会弹出Azure Function支持的触发器。触发器有很多有HttpTrigger，BlobTrigger，CosmosDbTrigger等等。这里选择最佳简单的HttpTriger触发器。接着会提示输入项目名称，输入名称后回车就可以生成本地项目了。
+点击新建按钮会弹出Azure Function支持的触发器。触发器有很多有HttpTrigger，BlobTrigger，CosmosDbTrigger等等。这里选择最简单的HttpTriger触发器。接着会提示输入项目名称，输入名称后回车就可以生成本地项目了。
 ## Function代码
 我们简单演示下Azure Function，使用这个函数实现一个简单的两个数相加返回相加结果。   
 ```
@@ -59,10 +59,10 @@ namespace Company.Function
     }
 }
 ```
-以.net为语言的Azure Function入口就是一个run方法。run方法的入参有2个，一个是HttpRequest，一个Ilogger。其中HttpRequest包含了http请求的信息，QueryString、body、headers等。这个类就是来自Microsoft.AspNetCore.Mvc命名空间。返回值是Task<IActionResult>。那么本质上一个Function其实可以看做是标准MVC方案里的一个Action。只是缺乏了参数自动绑定。我们需要的参数都要从HttpRequest对象上提取。    
+以C#为语言的Azure Function入口就是一个run方法。run方法的入参有2个，一个是HttpRequest，一个Ilogger。其中HttpRequest包含了http请求的信息，QueryString、body、headers等。这个类就是来自Microsoft.AspNetCore.Mvc命名空间。返回值是Task<IActionResult>。那么本质上一个Function其实可以看做是标准MVC方案里的一个Action。只是缺乏了参数自动绑定。我们需要的参数都要从HttpRequest对象上提取。    
 上面的代码很简单，就是获取body内容反序列化成一个动态对象，获取参数A、B，然后相加得到C，通过OkObjectResult直接返回出去。
 ## 本地测试
-在VSCode界面按F5启动调试。VSCode会启动一个示例，可以接受http请求。我们使用postman往这个地址post一个json数据过去。
+在VSCode界面按F5启动调试。VSCode会启动一个本地实例，可以接受http请求。我们使用postman往这个地址post一个json数据过去。
 ```
 {
     "A" : 1 ,
@@ -81,7 +81,7 @@ namespace Company.Function
 ## 运行函数
 点击函数名称弹出明细界面。点击“获取函数URL”获取调用这个函数的真实URL。   
 ![0AKmkD.png](https://s1.ax1x.com/2020/09/27/0AKmkD.png)   
-有了这个地址我们就可以在全球范围内使用这个函数拉。让我们使用Postman再测试一下。
+有了这个地址我们就可以在全球范围内使用这个函数啦。让我们使用Postman再测试一下。
 ![0AKG0f.png](https://s1.ax1x.com/2020/09/27/0AKG0f.png)
 可以看到返回了正确的结果。
 ## 总结
