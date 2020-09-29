@@ -86,3 +86,6 @@ namespace Company.Function
 可以看到返回了正确的结果。
 ## 总结
 以上我们使用C#代码实现了一个简单的Azure Functions并调用了它。Azure Functions还支持Java、Nodejs、Python等常用的编程语言。Azure Functions跟Azure生态紧密结合，除了支持HttpTrigger，还支持CosmosDb，Azure Blob，甚至是Iot边缘计算等场景。Azure Functions是Azure的Serverless解决方案，它具有无需基础结构管理、动态可伸缩性、加快上市、更高效地使用资源等优点，大家如果想体验Serverless可以尝试一下。
+    
+## 关注我的公众号一起玩转技术   
+![](https://s1.ax1x.com/2020/06/29/NfQjds.jpg)
