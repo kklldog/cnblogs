@@ -130,3 +130,6 @@ steps:
 ![wGUSbV.png](https://s1.ax1x.com/2020/09/10/wGUSbV.png)
 ## 总结
 以上通过2篇文章简单的介绍了Azure DevOps Pipeline如何实现CICD功能。Azure DevOps Pipeline给我的感觉是比较易用的，配置yml其实都是图形化的上手难度会比较小。另外它跟Github有深入的集成，可以使用Github的账号直接登录。况且它还是个免费服务，大家可以试试。
+    
+## 关注我的公众号一起玩转技术   
+![](https://s1.ax1x.com/2020/06/29/NfQjds.jpg)

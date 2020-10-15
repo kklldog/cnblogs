@@ -99,3 +99,6 @@ var insert = function(db, callback) {
 
 ## 总结
 Azure Cosmos DB是微软基于Azure开发的一款NoSql数据库，它支持多种数据库API。比如按SQL方式查询，按MongoDB方式读写等。如果你有海量文档数据需要存储及查询，你可以把它存储在Azure Cosmos DB上，由Azure来为你提供低延时、高吞吐量以及高达99.999%的SLA服务，而你只需要挑选自己喜欢的方式来进行它完成自己的业务。
+    
+## 关注我的公众号一起玩转技术   
+![](https://s1.ax1x.com/2020/06/29/NfQjds.jpg)
