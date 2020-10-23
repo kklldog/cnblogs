@@ -2,7 +2,20 @@
 Azure 静态 Web 应用是一种服务，可从 GitHub 存储库自动构建完整的堆栈 Web 应用，并将其部署到 Azure，目前它还是预览版。   
 ![BAJAC4.md.png](https://s1.ax1x.com/2020/10/23/BAJAC4.md.png)   
 Azure 静态 Web 应用通过与github actions集成，通过监听仓库的分支，当分支有push，pull request等动作的时候自动触发构建，并且部署到Azure。   
-Azure 静态 Web 应用支持对常见的VUE，React，Angular甚至Blazor进行自动构建及部署。并且部署的网站会使用Azure分布在全球的服务器，当用户访问的时候会选择地理位置最近的服务器来加速访问速度提高用户体验。
+Azure 静态 Web 应用支持对常见的VUE，React，Angular甚至Blazor进行自动构建及部署。并且部署的网站会使用Azure分布在全球的服务器，当用户访问的时候会选择地理位置最近的服务器来加速访问速度提高用户体验。   
+主要特点：
+1. 适用于 HTML、CSS、JavaScript 和映像等静态内容的 Web 托管。
+2. 由 Azure Functions 提供的集成 API 支持。
+3. 一流的 GitHub 集成，其中存储库更改将触发生成和部署。
+4. 全球分布的静态内容，使内容更接近你的用户。
+5. 可自动续订的免费 SSL 证书。
+6. 自定义域为应用提供品牌自定义。
+7. 调用 API 时使用反向代理的无缝安全模型，这不需要配置 CORS。
+8. 身份验证提供程序与 Azure Active Directory、Facebook、Google、GitHub 和 Twitter 集成。
+9. 可自定义的授权角色定义和分配。
+10. 后端路由规则，使你能够完全控制所提供的内容和路由。
+11. 生成的临时版本由拉取请求提供支持，在发布前提供站点的预览版本。
+
 ## 创建VUE项目
 这次我们使用国内最常见的VUE作为前端的框架来体验下Azure静态web应用的功能。   
 使用VUE CLI新建一个VUE项目，使用过VUE的用户应该都知道，CLI生成的项目直接是可以运行的。
