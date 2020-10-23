@@ -34,6 +34,9 @@ vue create az_static_vue_test
 跟创建其他资源类似，填写一个名称，区域选离自己近的。源代码管理选择使用Github账户，点击之后会跳转到Github授权页面。授权完成后就可以选择刚才上次的VUE项目了。   
 储存库：az_static_vue_test   
 分支：main   
+生成预设：Vue.js   
+应用位置：/   
+应用项目位置：dist   
 填写完成之后点击“创建”开始创建资源，等待一会Azure提示创建成功之后我们可以进入资源的概览界面。复制URL地址到浏览器访问一下：
 ![BAKwLD.png](https://s1.ax1x.com/2020/10/23/BAKwLD.png)   
 可以看到我们的VUE项目的默认界面出现了。也就是说Azure静态web应用为我们自动编译了VUE的代码并把产物直接部署好了。   
