@@ -42,3 +42,5 @@ API位置：默认。因为我们没有部署api，所以默认不用管他。
 ![B0sGEn.png](https://s1.ax1x.com/2020/11/01/B0sGEn.png)   
 ## 总结
 通过简单的演示，我们熟悉了如何使用Azure静态web应用来部署blazor项目。流程上同部署VUE几乎一致，就是预设模板那里需要选择blazor而已，相当方便。当然了只有前端界面没有api服务是无法真正用来生产的，下一次我们演示下如何使用Azure静态web应用集成并调用Azure Functions 。
+## 关注我的公众号一起玩转技术   
+![](https://s1.ax1x.com/2020/06/29/NfQjds.jpg)
