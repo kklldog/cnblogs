@@ -13,7 +13,43 @@
 ![rZ2qDH.png](https://s3.ax1x.com/2020/12/13/rZ2qDH.png)
 点击“下一步”弹出配置界面，这个页面可以选择github上的仓库。
 我随便选一个以前提交上去的RazorpageCrudDemo吧。分支选择master。运行时堆栈选择：.net core，版本 .net core 3.1 lts 。
-![rZ2bKe.png](https://s3.ax1x.com/2020/12/13/rZ2bKe.png)
+```
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy ASP.Net Core app to Azure Web App - az-app-service-01
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Set up .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '3.1.102'
+
+    - name: Build with dotnet
+      run: dotnet build --configuration Release
+
+    - name: dotnet publish
+      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'az-app-service-01'
+        slot-name: 'production'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_677a6a0b22a146f8b67ab3e6372bbd60 }}
+        package: ${{env.DOTNET_ROOT}}/myapp 
+```
 点击“完成”会自动生成一个yml文件。这个yml配置的就是github的action workflow。我们的azure应用服务跟github就是通过它串起来的。
 ## 验证部署
 ![rZ2TgO.png](https://s3.ax1x.com/2020/12/13/rZ2TgO.png)
