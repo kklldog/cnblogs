@@ -132,3 +132,4 @@ Host.CreateDefaultBuilder(args)
             this.tbx2.Text = App.ConfigClient["connection"];
         }
 ```
+我们通过直接访问App类上的ConfigClient对象读取配置信息。
