@@ -124,7 +124,7 @@ Host.CreateDefaultBuilder(args)
 ```
 实例化的位置可以选在App文件的Application_Startup方法内。并且把实例直接挂到App类的静态变量上。
 > 注意：Application_Startup方法是同步方法。调用ConnectAsync之后需要调用GetAwaiter()方法等待连接成功。
-### 在窗体程序内读取配置
+### 在窗体程序内使用配置
 ```
  private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -133,3 +133,16 @@ Host.CreateDefaultBuilder(args)
         }
 ```
 我们通过直接访问App类上的ConfigClient对象读取配置信息。
+## AgileConfig.Client公共方法
+下面列举下Client常用的几个公共方法    
+| 名称 | 说明 |    
+| ---- | ---- |    
+| string this[string key] | 直接通过键索引值 |   
+| string Get(string key) | 根据键获取值 |    
+| List<ConfigItem> GetGroup(string groupName) | 根据组名获取配置列表 |    
+| Task<bool> ConnectAsync() | 连接至服务器 |    
+| bool Load() | 手工从服务器拉取一次配置到客户端 |    
+| void LoadConfigs(List<ConfigItem> configs) | 手工把配置项加载到客户端 |    
+| event Action<ConfigChangedArg> ConfigChanged | 这是一个事件，当某个配置值发生变化的时候触发 |     
+
+
