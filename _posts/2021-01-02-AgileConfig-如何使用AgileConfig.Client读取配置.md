@@ -1,4 +1,7 @@
-下面通过几个示例来演示下如何AgileConfig.Client来读取配置：
+前面的文章都是介绍AgileConfig服务端已经控制台是如何工作、如何使用的，其实AgileConfig还有一个重要的组成部分：AgileConfig.Client。    
+AgileConfig.Client是使用C#编写的一个类库，只有使用它才能跟AgileConfig的服务端配合工作实现实时推送配置信息等功能。    
+最近有几个同学问我如何集成Client，如何使用Client，看来光是Readme上的示例还是不够的，有必要比较详细的介绍下如何使用AgileConfig.Client。    
+下面通过几个示例来演示下如何AgileConfig.Client如何在mvc，控制台，wpf等程序上来读取配置：
 ## asp.net core mvc下读取配置
 mvc项目应该是目前使用最广泛的项目，同样它与AgileConfig.Client的集成最深入。下面来看看如何在mvc项目下使用AgileConfig.Client。
 ### 安装AgileConfig.Client
@@ -124,6 +127,7 @@ Host.CreateDefaultBuilder(args)
 ```
 实例化的位置可以选在App文件的Application_Startup方法内。并且把实例直接挂到App类的静态变量上。
 > 注意：Application_Startup方法是同步方法。调用ConnectAsync之后需要调用GetAwaiter()方法等待连接成功。
+
 ### 在窗体程序内使用配置
 ```
  private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -144,5 +148,12 @@ Host.CreateDefaultBuilder(args)
 | bool Load() | 手工从服务器拉取一次配置到客户端 |    
 | void LoadConfigs(List<ConfigItem> configs) | 手工把配置项加载到客户端 |    
 | event Action<ConfigChangedArg> ConfigChanged | 这是一个事件，当某个配置值发生变化的时候触发 |     
-
+     
+gihub地址：    
+[AgileConfig](https://github.com/kklldog/AgileConfig)    
+[AgileConfig.Client](https://github.com/kklldog/AgileConfig_Client)    
+[AgileConfig MVCSample](https://github.com/kklldog/AgileConfig_Client/tree/master/AgileConfigMVCSample)   
+[AgileConfig WPFSample](https://github.com/kklldog/AgileConfig_Client/tree/master/AgileConfigWPFSample)    
+[AgileConfig ConsoleSample](https://github.com/kklldog/AgileConfig_Client/tree/master/AgileConfigConsoleSample)    
+求星星！！！
 
