@@ -1,4 +1,8 @@
-## Restful API
+## AgileConfig
+AgileConfig是一个基于.net core开发的轻量级配置中心。    
+AgileConfig秉承轻量化的特点，部署简单、配置简单、使用简单、学习简单，它只提取了必要的一些功能，并没有像Apollo那样复杂且庞大。但是它的功能也已经足够你替换webconfig，appsettings.json这些文件了。如果你不想用微服务全家桶，不想为了部署一个配置中心而需要看N篇教程跟几台服务器那么你可以试试AgileConfig ：）    
+
+## Restful Api
 为了更加方便的跟业务系统集成最新版的AgileConfig已支持json格式的 restful api来维护配置 。   
 本API入参跟出参为json格式，所以请求的时候需设置Content-Type头部为application/json 。    
 使用basic简单认证，设置Authorization头部为Basic base64(userName:password) 。    
