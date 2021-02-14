@@ -123,3 +123,5 @@ select * from log2 where (logtime > '2019-05-01' and logtime < '2019-06-01') or 
 把表按前面的方法进行分区拆分，查询花费时间为1s。读性能大概为未分区时的3倍。
 ## 总结
 经过简单的测试，SQL Server的分区表功能能大副提高数据库的读写性能。通过SQL Server Management Stduio的简单设置就可以对数据库表进行分区操作，并且对应用层的代码完全是无感的，比用分表分库中间件来说简单多了。
+## 关注我的公众号一起玩转技术   
+![](https://s1.ax1x.com/2020/06/29/NfQjds.jpg)
