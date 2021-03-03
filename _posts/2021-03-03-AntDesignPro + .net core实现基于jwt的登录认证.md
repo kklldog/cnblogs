@@ -1,6 +1,6 @@
-很多同学说AgileConfig的UI实在是太丑了。我想想也是的，本来这个项目是我自己使用的，一开始甚至连UI都没有，全靠手动再数据库里修改数据。后来加上了UI也是使用了老掉牙的bootstrap3做为基础样式。前台框架也是使用了angularjs，同样是老掉牙的东西。过年期间终于下决心翻新AgileConfig的前端UI。最后选择的前端UI框架为AntDesign Pro + React。至于为啥选AntDesign Pro是因为他好看，而且流行，选择React是因为VUE跟Angular我都略知一二，干脆趁此机会学一学React为何物，为何这么流行。   
-登录的认证方案为JWT，其实本人对JWT不太感冒（请看这里《》），无奈大家都喜欢，那我也只能随大流。   
-原来angularjs的方案并不是完全的前后端分离项目，那么现在起AgileConfig的UI将跟后端API完全分离开来。我们先看看后端asp.net core方面会如何进行修改。
+很多同学说AgileConfig的UI实在是太丑了。我想想也是的，本来这个项目是我自己使用的，一开始甚至连UI都没有，全靠手动在数据库里修改数据。后来加上了UI也是使用了老掉牙的bootstrap3做为基础样式。前台框架也是使用了angularjs，同样是老掉牙的东西。过年期间终于下决心翻新AgileConfig的前端UI。最后选择的前端UI框架为AntDesign Pro + React。至于为啥选Ant-Design Pro是因为他好看，而且流行，选择React是因为VUE跟Angular我都略知一二，干脆趁此机会学一学React为何物，为何这么流行。   
+登录的认证方案为JWT，其实本人对JWT不太感冒（请看这里《[我们真的需要jwt吗？](https://www.cnblogs.com/kklldog/p/should-we-need-jwt-always.html)》），无奈大家都喜欢，那我也只能随大流。   
+其实基于ant-design pro的界面我已经翻的差不多了，因为它支持mock数据，所以我一行后台代码都没修改，已经把界面快些完了。从现在开始要真正的跟后端代码进行联调了。那么我们先从登录开始吧。先看看后端asp.net core方面会如何进行修改。
 ## 修改ASP.NET Core后端代码
 ```
   "JwtSetting": {
