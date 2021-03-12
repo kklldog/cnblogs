@@ -1,0 +1,155 @@
+AgileConfig的UI使用react重写快完成了。上次搞定了基于jwt的登录模式，但是还有点问题。现在使用react重写后，agileconfig成了个确确实实的前后端分离项目。那么其实部署的话要分2个站点部署，把前端build完的静态内容部署在一个网站，把server端也部署在一个站点。然后修改前端的baseURL让spa的api请求都指向server的网站。   
+这样做也不是不行，但是这不符合AgileConfig的精神，那就是简单。asp.net core程序本身其实就是一个http服务器，所以完全可以把spa网站使用它来承载。这样只需要部署一个站点就可以同时跑spa跟后端server了。   
+其实最简单的办法就是把build完的文件全部丢wwwroot文件夹下面。然后访问：
+```
+http://localhost:5000/index.html
+```
+但是这样我们的入口是index.html，这样看起来比较别扭，不够友好。而且这些文件直接丢在wwwroot的根目录下，会跟网站其他js、css等内容混合在一起，也很混乱。   
+那么下面我们就要解决这两个文件，我们要达到的目的有2个：
+1. spa的入口path友好，比如http://localhost:5000/ui
+2. spa静态文件存放的目录独立，比如存放在wwwroot/ui文件夹下，或者别的什么目录下。   
+
+要实现以上内容只需要一个自定义中间件就可以了。
+## wwwroot\ui
+```
+wwwroot\ui
+```
+![](https://ftp.bmp.ovh/imgs/2021/03/ba20f594eb1e42f9.png)    
+我们把build完的静态文件全部复制到wwwroot\ui文件夹内，以跟其他静态资源进行区分。当然你也可以放在任意目录下，只要是能读取到就可以。    
+## ReactUIMiddleware
+```
+namespace AgileConfig.Server.Apisite.UIExtension
+{
+    public class ReactUIMiddleware
+    {
+        private static Dictionary<string, string> _contentTypes = new Dictionary<string, string>
+        {
+            {".html", "text/html; charset=utf-8"},
+            {".css", "text/css; charset=utf-8"},
+            {".js", "application/javascript"},
+            {".png", "image/png"},
+            {".svg", "image/svg+xml"},
+            { ".json","application/json;charset=utf-8"},
+            { ".ico","image/x-icon"}
+        };
+        private static ConcurrentDictionary<string, byte[]> _staticFilesCache = new ConcurrentDictionary<string, byte[]>();
+        private readonly RequestDelegate _next;
+        private readonly ILogger _logger;
+        public ReactUIMiddleware(
+           RequestDelegate next,
+           ILoggerFactory loggerFactory
+       )
+        {
+            _next = next;
+            _logger = loggerFactory.
+                CreateLogger<ReactUIMiddleware>();
+        }
+
+        private bool ShouldHandleUIRequest(HttpContext context)
+        {
+            return context.Request.Path.HasValue && context.Request.Path.Value.Equals("/ui", StringComparison.OrdinalIgnoreCase);
+        }
+
+        private bool ShouldHandleUIStaticFilesRequest(HttpContext context)
+        {
+            //请求的的Referer为 0.0.0.0/ui ,以此为依据判断是否是reactui需要的静态文件
+            if (context.Request.Path.HasValue && context.Request.Path.Value.Contains("."))
+            {
+                context.Request.Headers.TryGetValue("Referer", out StringValues refererValues);
+                if (refererValues.Any())
+                {
+                    var refererValue = refererValues.First();
+                    if (refererValue.EndsWith("/ui", StringComparison.OrdinalIgnoreCase))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public async Task Invoke(HttpContext context)
+        {
+            const string uiDirectory = "wwwroot/ui";
+            //handle /ui request
+            var filePath = "";
+            if (ShouldHandleUIRequest(context))
+            {
+                filePath = uiDirectory + "/index.html";
+            }
+            //handle static files that Referer = xxx/ui
+            if (ShouldHandleUIStaticFilesRequest(context))
+            {
+                filePath = uiDirectory + context.Request.Path;
+            }
+
+            if (string.IsNullOrEmpty(filePath))
+            {
+                await _next(context);
+            }
+            else
+            {
+                //output the file bytes
+
+                if (!File.Exists(filePath))
+                {
+                    context.Response.StatusCode = 404;
+                    return;
+                }
+
+                context.Response.OnStarting(() =>
+                {
+                    var extType = Path.GetExtension(filePath);
+                    if (_contentTypes.TryGetValue(extType, out string contentType))
+                    {
+                        context.Response.ContentType = contentType;
+                    }
+                    return Task.CompletedTask;
+                });
+
+                await context.Response.StartAsync();
+
+                byte[] fileData = null;
+                if (_staticFilesCache.TryGetValue(filePath, out byte[] outfileData))
+                {
+                    fileData = outfileData;
+                }
+                else
+                {
+                    fileData = await File.ReadAllBytesAsync(filePath);
+                    _staticFilesCache.TryAdd(filePath, fileData);
+                }
+                await context.Response.BodyWriter.WriteAsync(fileData);
+
+                return;
+            }
+        }
+    }
+}
+
+```
+大概解释下这个中间件的思路。这个中间件的逻辑大概是分量部分。    
+1.拦截请求的路径为/ui的请求，直接从ui文件夹读取index.html静态文件的内容然后输出出去，这就相当于直接访问/index.html。但是这样的路径形式看起来更加友好。   
+2.拦截react spa需要的静态资源文件，比如css文件，js文件等。这里比较麻烦，因为spa拉静态文件的时候path是直接从网站root开始的，比如http://localhost:5000/xxx.js，那么怎么区分出来这个文件是react spa需要的呢？我们判断一下请求的Referer头部，如果Referer的path是/ui，那么就说明是react spa需要的静态资源，同样从ui文件夹去读取。    
+这里还需要给每个response设置指定的contentType不然浏览器无法准确识别资源。
+```
+   public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseMiddleware<ExceptionHandlerMiddleware>();
+            }
+            app.UseMiddleware<ReactUIMiddleware>();
+        
+        ...
+        ...
+
+        }
+```
+在Startup类的Configure方法内使用这个中间件。这样我们的改造就差不多了。
+## 运行一下
