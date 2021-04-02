@@ -1,4 +1,4 @@
-AgileConfig 在使用 react 编写UI后，变成了一个彻彻底底的前后端分离的项目，上一次解决了把react spa 跟asp.net core 站点集成起来 [asp.net core 集成 react spa](https://www.cnblogs.com/kklldog/p/netcore-embed-react.html)。本来我每次提交代码的时候都需要手动运行npm run build,然后把dist的内容复制到asp.net core网站的wwwroot/ui目录下。这样显然太麻烦了，于是尝试使用 github actions 来自动化这些步骤。   
+(AgileConfig)[https://github.com/kklldog/AgileConfig] 在使用 react 编写UI后，变成了一个彻彻底底的前后端分离的项目，上一次解决了把react spa 跟asp.net core 站点集成起来 [asp.net core 集成 react spa](https://www.cnblogs.com/kklldog/p/netcore-embed-react.html)。本来我每次提交代码的时候都需要手动运行npm run build,然后把dist的内容复制到asp.net core网站的wwwroot/ui目录下。这样显然太麻烦了，于是尝试使用 github actions 来自动化这些步骤。   
 我们要实现的目标是：提交代码后自动运行npm run build，自动把dist内容复制到wwwroot目录下，自动build dotnet程序，自动打包docker镜像，自动推送到dockerhub 。    
 本来以为把这个actions分成两个job，job1负责编译react app，等job1完成后运行job2编译dotnet程序就可以了，但尝试下来并没有那么简单。其中有个问题就是job1生成的dist内容没有办法被job2使用，即使在job1里使用命令复制dist的内容到相应目录，job2还是无法使用这些内容，貌似每个job之间文件是隔离的。   
 在经过咨询大佬后得知了Github Actions Artifact 这个功能。这样我们只需要把job1的产物先存储在Artifact内，job2去下载到指定目录就可以了。   
@@ -117,6 +117,11 @@ jobs:
         repository: kklldog/agile_config
         tags: test
 ```
+## 总结
+通过以上一番折腾，当我们提交代码后会自动运行这个github actions，在执行完后，我们的程序直接被打包成了docker image 并且自动上传到了dockerhub。这样就可以直接通过docker 命令来运行了。从此再也不用人肉编译react app，人肉编译dotnet core程序拉，美滋滋。   
+    
+最后推广一波我的开源项目，开源不易，希望多多🌟🌟🌟。   
+[AgileConfig - 一个轻量级配置中心。](https://github.com/kklldog/AgileConfig)
 
 ## 关注我的公众号一起玩转技术   
 ![](https://s1.ax1x.com/2020/06/29/NfQjds.jpg)
