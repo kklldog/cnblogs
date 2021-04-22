@@ -51,10 +51,12 @@ azure data studio 还可以添加一些 Widget 来显示一些自定义信息。
 ![](https://ftp.bmp.ovh/imgs/2021/04/cd0ee53ab97c757a.png)   
 点击右上角的三个点，可以查看详情。   
 ## 插件
-azure data studio 于 vscode 类似，支持安装插件。
+azure data studio 于 vscode 类似，支持安装插件。   
 ![](https://ftp.bmp.ovh/imgs/2021/04/930b46442090ffb6.png)   
 CTRL+SHIFT+X 打开插件搜索目录。可以看到有很多插件可以选。可以安装语言包，可以安装主题等。
 ![](https://ftp.bmp.ovh/imgs/2021/04/a127331353497c13.png)   
 有个比较有意思的插件“Server Report”可以显示服务器当前的负载等情况。
 ## 总结
-azure data studio 简单的试用了下。它非常轻量级，能够胜任基本的查询分析任务。它更偏向于sql语句的编辑器，还跟git有良好的集成。它还支持插件，widget 等组件可以在首页直接展示数据库的一些状态。但是它缺乏一些高级的数据库管理功能，比如你要做数据库复制订阅等操作它就不支持。当你只是像找个sql编辑查询工具可以考虑azure data studio ，而且它跨平台。
+azure data studio 简单的试用了下。它非常轻量级，能够胜任基本的查询分析任务。它更偏向于sql语句的编辑器，还跟git有良好的集成。它还支持插件，widget 等组件可以在首页直接展示数据库的一些状态。但是它缺乏一些高级的数据库管理功能，比如你要做数据库复制订阅等操作它就不支持。当你只是像找个sql编辑查询工具可以考虑azure data studio ，而且它跨平台。  
+## 关注我的公众号一起玩转技术   
+![](https://s1.ax1x.com/2020/06/29/NfQjds.jpg)
