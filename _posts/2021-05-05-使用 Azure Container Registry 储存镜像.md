@@ -20,8 +20,10 @@ SKU选择基本。
 ```
 az acr login --name minjiezhou
 ```
+
 使用az acr login 命令登录到 Azure Container Registry 。   
-> 请先安装Azure CLI 。
+> 请先安装Azure CLI 。   
+
 ```
 docker images 
 
@@ -31,12 +33,16 @@ mcr.microsoft.com/dotnet/runtime   3.1                 e77a510a55f6        3 wee
 kklldog/agile_config               test                68288d3f5669        4 weeks ago         281MB
 kklldog/agile_config               latest              6b2b834fa8d4        5 months ago        281MB
 ```
+
 登录成功后，我们先列一下本地的镜像。如果本地没有镜像那就先去dockerhub上拉一个下来。
+
 ```
 docker tag kklldog/agile_config minjiezhou.azurecr.io/agile_config:v1
 ```
+
 我们演示下把agile_config的镜像推送到容器注册表上去。   
 使用 docker tag 命令重命名镜像。重命名的格式为 <登录服务器>/agile_config:v1
+
 ```
 docker push minjiezhou.azurecr.io/agile_config:v1
 
@@ -50,13 +56,17 @@ b22af9287e60: Pushed
 f5600c6330da: Pushed
 v1: digest: sha256:15113de4c788ac61aecdb3a676beaff18f09dd8f786b012e5f14274f295e7dc7 size: 1793
 ```
+
 使用 docker push 命令开始推送。等待命令执行完毕后转到门户查看。   
-![g1esNF.png](https://z3.ax1x.com/2021/05/06/g1esNF.png)
-点击“储存库”菜单，可以看到我们的agile_config镜像已经存在了。
+![g1esNF.png](https://z3.ax1x.com/2021/05/06/g1esNF.png)   
+点击“储存库”菜单，可以看到我们的agile_config镜像已经存在了。  
+
 ```
 docker rmi minjiezhou.azurecr.io/agile_config:v1
 ```
+
 为了测试拉取镜像，我们先使用 docker rmi 命令删除本地的镜像。
+
 ```
 docker pull minjiezhou.azurecr.io/agile_config:v1
 
@@ -65,6 +75,7 @@ Digest: sha256:15113de4c788ac61aecdb3a676beaff18f09dd8f786b012e5f14274f295e7dc7
 Status: Downloaded newer image for minjiezhou.azurecr.io/agile_config:v1
 minjiezhou.azurecr.io/agile_config:v1
 ```
+
 使用 docker pull 命令从Azure容器注册表服务拉取我们的agile_config镜像。
 
 ## 总结
