@@ -55,6 +55,7 @@ CREATE TABLE `agc_user_app_auth` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 ```
 4. 新建agc_user_role表
+
 ```
 CREATE TABLE `agc_user_role` (
   `id` varchar(36) NOT NULL,
@@ -65,6 +66,7 @@ CREATE TABLE `agc_user_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 ```
+
 新建完成表跟字段后重新运行程序，会提示重置超级管理员密码,之后就可以正常使用了。
 
 ## 最后
